@@ -39,7 +39,8 @@ View(pakietyDF)
 #z uzyciem mojego klucza "key201215""
 #endpoint<-"api.openweathermap.org/data/2.5/weather?q=Warszawa&units=metric&appid=4f7c49e6faf21631baab7265cfb1d05f"
 #z uzyciem mojego klucza "Default" dla miasta Radzyń Podlaski
-endpoint<-"http://api.openweathermap.org/data/2.5/weather?q=Radzy%C5%84%20Podlaski&units=metric&appid=df418388b29f64e4c06470e70ec74f59"
+endpoint<-"http://api.openweathermap.org/data/2.5/weather?q=Radzy%C5%84%20Podlaski&units=metric&appid=keyAPI"
+#endpoint<-"http://api.openweathermap.org/data/2.5/weather?q=Radzy%C5%84%20Podlaski&units=metric&appid=df418388b29f64e4c06470e70ec74f59"
 endpoint
 #Ten link mozna obejrzec w przegladarce. Zawartosc wyglada tak:
 #{"coord":{"lon":22.62,"lat":51.78},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04n"}],"base":"stations","main":{"temp":2.36,"feels_like":-1.77,"temp_min":2,"temp_max":2.78,"pressure":1021,"humidity":100},"visibility":10000,"wind":{"speed":3.6,"deg":160},"clouds":{"all":90},"dt":1608064196,"sys":{"type":1,"id":1702,"country":"PL","sunrise":1608013828,"sunset":1608041955},"timezone":3600,"id":760680,"name":"Radzyń Podlaski","cod":200}
