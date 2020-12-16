@@ -240,7 +240,7 @@ liczBMI2<- function( ){
 
 liczBMI2<- function( ){
   komunikat<- "podaj mase i wzrost oddzielone przecinkiem:"
-  wektorOdp<- wektorOdp<- as.numeric( strsplit( readline(komunikat),",")[[1]] )
+  wektorOdp<- as.numeric( strsplit( readline(komunikat),",")[[1]] )
   bmi<-  wektorOdp[1] /  ( wektorOdp[2]/100)^2 
   bmi
 }
