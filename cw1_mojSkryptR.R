@@ -74,7 +74,7 @@ x
 
 #Jakiego typu bedzie nasza zmienna x?
 x <-"to jest zmienna"
-class(x)
+class(x) #typ zmiennej
 #[1] "character"
 x <- 123
 class(x)
@@ -82,19 +82,28 @@ class(x)
 #Tak naprawde kazda taka (nawet pojedyncza zmienna) w R jest wektorem. Jest to wektor z jednym elementem.
 #Czyli nie mamy zmiennej, ktora jest liczba tylko zmienna, ktora jest wektorem z jedna liczba.
 
+x <- c(1,2,3,4,5)
+class(x)
+#[1] "numeric"
+?c #znak zapytania wyswietla pomoc
+x<-c("jeden","dwa","trzy")
+class(x)
+#[1] "character"
+x <- c(1,"a",3,4,5)
+class(x)
+#[1] "character"
+x
+
 #Garsc informacji na temat wektorow (Help):
 ?vector
 #Dane w wektorze musza byc jednego typu.
 #The atomic modes are "logical", "integer", "numeric" (synonym "double"), "complex", "character" and "raw".
 #complex - liczby zespolone
-x <- c(1,2,3,4,5)
-class(x)
-?c
-x<-c("jeden","dwa","trzy")
-class(x)
-x <- c(1,"a",3,4,5)
-class(x)
+x <- 1:100
 x
+class(x)
+#[1] "integer"
+#Mozna zrobic konwersje typow w wektorze.
 
 mojVector<-vector("numeric",10)
 mojVector
@@ -117,6 +126,25 @@ class(mojVector)
 #Nawet jesli ta zmienna wyglada jak cyfra.
 #Konwersja jest w tym kierunku, w ktorym jest najbardziej mozliwa.
 #Jesli jednym z el. wektora jest character, to wszystko zostanie zamienione na character.
+mojVector<-c(1,2,3,4,5,FALSE, 1.5)
+mojVector
+#[1] 1.0 2.0 3.0 4.0 5.0 0.0 1.5
+class(mojVector)
+#[1] "numeric"
+mojVector<-c(1,2,3,4,5,FALSE, 1.5,"12")
+mojVector
+#[1] "1"     "2"     "3"     "4"     "5"     "FALSE" "1.5"   "12"   
+class(mojVector)
+#[1] "character"
+
+mojVector<-c(0,1,0,1,0,1)
+class(mojVector)
+#[1] "numeric"
+mojVector<-as.logical(mojVector)
+mojVector
+#[1] FALSE  TRUE FALSE  TRUE FALSE  TRUE
+class(mojVector)
+#[1] "logical"
 
 mojVector<-c(1,2,3,4,5,FALSE,"234")
 class(mojVector)
@@ -151,6 +179,7 @@ mojVector
 
 
 #Czy mozna wykonywac operacje arytmetyczne na wektorach, np. liczbowych?
+# + - * / ^
 
 wektor1<-seq(1,10,1)
 wektor1
@@ -240,6 +269,33 @@ lista
 #[[3]]
 #[1]  TRUE FALSE
 
+lista <- list(c(1,2,3,4,5),c("jeden","dwa","trzy"),c(TRUE,FALSE))
+lista2 <- list(c(1,2,3,4,5),c("jeden","dwa","trzy"),c(TRUE,FALSE))
+x <- c(1,lista,lista2)
+x
+#[[1]]
+#[1] 1
+#[[2]]
+#[1] 1 2 3 4 5
+#[[3]]
+#[1] "jeden" "dwa"   "trzy" 
+#[[4]]
+#[1]  TRUE FALSE
+#[[5]]
+#[1] 1 2 3 4 5
+#[[6]]
+#[1] "jeden" "dwa"   "trzy" 
+#[[7]]
+#[1]  TRUE FALSE
+class(x)
+#[1] "list"
+
+#Nie da sie stworzyc wektora list.
+x <- as.vector(c(1,lista,lista2),mode="any")
+x
+class(x)
+#[1] "list"
+
 #Indeksowanie w R jest od 1.
 lista[[2]] #zwraca drugi wektor z listy
 #[1] "jeden" "dwa"   "trzy"
@@ -318,6 +374,9 @@ df<- data.frame(index=c(1,2,3), imie=c("jan","ala","bartek"), plec=factor(c("mez
 View(df)
 
 getwd()
+?read.table
+data <- read.table("dane.csv", header=TRUE, sep=";")
+View(data)
 ?read.csv
 data <- read.csv("dane.csv")
 View(data) #w pliku separatorem zmiennych jest srednik, a w read.csv domyslnie przecinek, wiec zaczytanie z uzyciem domyslnych opcji zaczyta wszystko jako jedna kolumne
@@ -444,6 +503,21 @@ liczBMI(masa=c(100,200,100),wzrost=c(10,15,0))
 #[1] 3
 #[1] "dzielenie przez zero"
 
+data <- read.csv2("dane.csv")
+#View(data)
+
+liczBMI <- function(masa,wzrost){
+  k <- match(0,wzrost)
+  if(!is.na(k)){
+    bmi <- "dzielenie przez zero"
+  }else{
+    bmi <- masa/(wzrost/100)^2
+  }
+  #bmi #return nie trzeba dawac, bo zawsze daje ostatnia wartosc
+}
+wynik <- liczBMI(data$waga,data$wzrost)
+wynik
+
 liczBMI<-function(masa,wzrost){
   bmi<- masa/(wzrost/100)^2
   bmi
@@ -486,3 +560,4 @@ liczBMI <- function( ){
   bmi <- wektorOdp[1] / (wektorOdp[2]/100)^2 
   bmi
 }
+liczBMI()
